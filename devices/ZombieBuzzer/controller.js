@@ -4,6 +4,9 @@ const BluePromise = require('bluebird');
 //const CONSTANTS = require('./constants');
 const debug = require('debug')('neeo:zombie');
 
+var Gpio = require('onoff').Gpio; 
+var pushButton = new Gpio(8, 'in', 'both',{debounceTimeout: 10});
+
 /*
  * Device Controller
  * Events on that device from the Brain will be forwarded here for handling.
@@ -54,11 +57,34 @@ module.exports.registerStateUpdateCallback = function(updateFunction) {
   sendComponentUpdate = updateFunction;
 };
 
+
+
+pushButton.watch(function (err, value) { //Watch for hardware interrupts on pushButton GPIO, specify callback function
+  if (err) { //if an error
+    console.error('There was an error', err); //output error message to console
+  return;
+  }
+
+  if (counter)counter=false;
+  else counter=true;
+  debug('Value: '+value);
+  const updateButtonPayload = {
+   //uniqueDeviceId: COMPLEX_DEVICE_UPDATE_ENTRY,
+    uniqueDeviceId: 'default',
+    component: 'BUZZER_SENSOR', 
+    value: counter
+  };
+    sendComponentUpdate(updateButtonPayload)
+   .catch((error) => {
+     debug('failed to send text notification', error.message);
+   });
+});
+
 /**
  * Send random updates to the NEEO Brain. This is just for illustration purpose,
  * idealy those events would be sent of a device
  */
-setInterval(() => {
+/*setInterval(() => {
   //debug('Interval');
 
   if (!sendComponentUpdate) {
@@ -81,4 +107,13 @@ setInterval(() => {
      debug('failed to send text notification', error.message);
    });
 
-}, UPDATE_FREQUENCY_MS);
+}, UPDATE_FREQUENCY_MS);*/
+
+
+function unexportOnClose() { //function to run when exiting program
+  //LED.writeSync(0); // Turn LED off
+  //LED.unexport(); // Unexport LED GPIO to free resources
+  pushButton.unexport(); // Unexport Button GPIO to free resources
+};
+
+process.on('SIGINT', unexportOnClose); //function to run when user closes using ctrl+c 
