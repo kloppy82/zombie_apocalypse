@@ -19,7 +19,7 @@ const controller = require('./controller');
 
 const ZombieBuzzer = neeoapi.buildDevice('Zombie Buzzer')
   .setManufacturer('NEEO')
-  .setSpecificName('Zombie Protector')
+  .setSpecificName('Zombie Buzzer')
   .addAdditionalSearchToken('zombie')
   .addAdditionalSearchToken('buzzer')
   .setType('ACCESSORY')

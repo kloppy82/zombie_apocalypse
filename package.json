@@ -10,7 +10,8 @@
     "glob": "^7.1.2",
     "lifx-http-api": "^1.0.3",
     "neeo-sdk": "NEEOInc/neeo-sdk",
-    "node-lifx": "^0.8.0"
+    "node-lifx": "^0.8.0",
+    "onoff": "^3.1.0"
   },
   "engines": {
     "node": ">=6.0.0"
