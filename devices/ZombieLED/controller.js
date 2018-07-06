@@ -24,7 +24,7 @@ function updateStripe(){
   console.log("Call updateStripe");
   pyshell.send('10 20 30 40');
   //pyshell.send(`${sliderValueR} ${sliderValueg} ${sliderValueB} ${sliderValueBr}`);
-  //console.log(`Sent: ${sliderValueR} ${sliderValueg} ${sliderValueB} ${sliderValueBr}`)
+  console.log("Sent: %d %d %d %d",sliderValueR,sliderValueg,sliderValueB,sliderValueBr);
   console.log("Call updateStripe End");
 }
 
