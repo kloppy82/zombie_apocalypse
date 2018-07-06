@@ -22,7 +22,8 @@ let sliderValueBr = 0;
 // sends a message to the Python script via stdin
 function updateStripe(){
   console.log("Call updateStripe");
-  pyshell.send(`${sliderValueR} ${sliderValueg} ${sliderValueB} ${sliderValueBr}`);
+  pyshell.send("10 20 30 40");
+  //pyshell.send(`${sliderValueR} ${sliderValueg} ${sliderValueB} ${sliderValueBr}`);
   console.log(`Sent: ${sliderValueR} ${sliderValueg} ${sliderValueB} ${sliderValueBr}`)
 }
 
@@ -50,7 +51,7 @@ module.exports.onButtonPressed = function onButtonPressed(name, deviceId) {
   /*switch(name){
     case "test": pyshell.send(10,20,30,40);
   }*/
-  pyshell.send(10,20,30,40);
+  pyshell.send("10 20 30 40");
 };
 
 module.exports.SliderSetRed = function SliderSetRed(deviceId,value) {
