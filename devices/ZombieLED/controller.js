@@ -7,10 +7,10 @@ const debug = require('debug')('neeo:zombie');
 var PythonShell = require('python-shell');
 var pyshell = new PythonShell('../rpi_ws281x/python/examples/zombie_alert_RGBC.py');
 
-let sliderValueR = 0;
-let sliderValueG = 0;
-let sliderValueB = 0;
-let sliderValueBr = 0;
+var sliderValueR = 0;
+var sliderValueG = 0;
+var sliderValueB = 0;
+var sliderValueBr = 0;
 /*
  * Device Controller
  * Events on that device from the Brain will be forwarded here for handling.
