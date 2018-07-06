@@ -22,6 +22,7 @@ let sliderValueBr = 0;
 // sends a message to the Python script via stdin
 function updateStripe(){
   pyshell.send(`${sliderValueR} ${sliderValueg} ${sliderValueB} ${sliderValueBr}`);
+  console.log(`Sent: ${sliderValueR} ${sliderValueg} ${sliderValueB} ${sliderValueBr}`)
 }
 
 
@@ -58,18 +59,21 @@ module.exports.SliderSetGreen = function SliderSetGreen(deviceId,value) {
   console.log(`[CONTROLLER]  Slider Green value ${value}`);
   // TODO implement the actions for your device here
   sliderValueG = value;
+  updateStripe();
 };
 
 module.exports.SliderSetBlue = function SliderSetBlue(deviceId,value) {
   console.log(`[CONTROLLER]  Slider Blue value ${value}`);
   // TODO implement the actions for your device here
   sliderValueB = value;
+  updateStripe();
 };
 
 module.exports.SliderSetBrightness = function SliderSetBrightness(deviceId,value) {
   console.log(`[CONTROLLER]  Slider Brightness value ${value}`);
   // TODO implement the actions for your device here
   sliderValueBr = value;
+  updateStripe();
 };
 
 module.exports.SliderGetRed = function SliderGetRed(deviceId) {
