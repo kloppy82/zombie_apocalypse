@@ -51,10 +51,40 @@ function endPython(){
 module.exports.onButtonPressed = function onButtonPressed(name, deviceId) {
   console.log(`[CONTROLLER] ${name} button pressed for device ${deviceId}`);
   // TODO implement the actions for your device here
-  /*switch(name){
-    case "test": pyshell.send(10,20,30,40);
-  }*/
-  pyshell.send("10 20 30 40");
+  switch(name){
+    case "FUNCTION RED":  sliderValueR = 255;
+                          sliderValueG = 0;
+                          sliderValueB = 0;
+                          sliderValueBr = 255;
+                          break;
+    case "FUNCTION GREEN":sliderValueR = 0;
+                          sliderValueG = 255;
+                          sliderValueB = 0;
+                          sliderValueBr = 255;
+                          break;
+    case "FUNCTION BLUE":  sliderValueR = 0;
+                          sliderValueG = 0;
+                          sliderValueB = 255;
+                          sliderValueBr = 255;
+                          break;
+    case "FUNCTION YELLOW":  sliderValueR = 255;
+                          sliderValueG = 255;
+                          sliderValueB = 0;
+                          sliderValueBr = 255;
+                          break;
+    case "POWER OFF":     sliderValueR = 0;
+                          sliderValueG = 0;
+                          sliderValueB = 0;
+                          sliderValueBr = 0;
+                          break;
+    case "POWER ON":      sliderValueR = 255;
+                          sliderValueG = 255;
+                          sliderValueB = 255;
+                          sliderValueBr = 255;
+                          break;
+  }
+  updateStripe();
+
 };
 
 module.exports.SliderSetRed = function SliderSetRed(deviceId,value) {
