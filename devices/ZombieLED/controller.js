@@ -5,7 +5,7 @@ const BluePromise = require('bluebird');
 const debug = require('debug')('neeo:zombie');
 
 var PythonShell = require('python-shell');
-var pyshell = new PythonShell('rpi_ws281x/python/examples/zombie_alert_RGBC.py');
+var pyshell = new PythonShell('../rpi_ws281x/python/examples/zombie_alert_RGBC.py');
 
 let sliderValueR = 0;
 let sliderValueG = 0;
@@ -51,6 +51,7 @@ module.exports.SliderSetRed = function SliderSetRed(deviceId,value) {
   console.log(`[CONTROLLER]  Slider Red value ${value}`);
   // TODO implement the actions for your device here
   sliderValueR = value;
+  updateStripe();
 };
 
 module.exports.SliderSetGreen = function SliderSetGreen(deviceId,value) {
