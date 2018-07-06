@@ -46,6 +46,10 @@ pyshell.end(function (err,code,signal) {
 module.exports.onButtonPressed = function onButtonPressed(name, deviceId) {
   console.log(`[CONTROLLER] ${name} button pressed for device ${deviceId}`);
   // TODO implement the actions for your device here
+  /*switch(name){
+    case "test": pyshell.send(10,20,30,40);
+  }*/
+  pyshell.send(10,20,30,40);
 };
 
 module.exports.SliderSetRed = function SliderSetRed(deviceId,value) {
