@@ -22,9 +22,9 @@ var sliderValueBr = 0;
 // sends a message to the Python script via stdin
 function updateStripe(){
   console.log("Call updateStripe");
-  pyshell.send('10 20 30 40');
-  //pyshell.send(`${sliderValueR} ${sliderValueg} ${sliderValueB} ${sliderValueBr}`);
-  console.log('Sent: %d %d %d %d',sliderValueR,sliderValueG,sliderValueB,sliderValueBr);
+  //pyshell.send('10 20 30 40');
+  pyshell.send(`${sliderValueR} ${sliderValueG} ${sliderValueB} ${sliderValueBr}`);
+  console.log(`Sent: ${sliderValueR} ${sliderValueG} ${sliderValueB} ${sliderValueBr}`);
   console.log("Call updateStripe End");
 }
 
