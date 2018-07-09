@@ -19,7 +19,7 @@
   "scripts": {
     "test": "mocha --exit \"test/**/*.js\"",
     "jshint": "jshint --show-non-errors --verbose lib/**/*.js",
-    "start": "neeo-sdk start",
+    "start": "sudo neeo-sdk start",
     "example:forwardaction": "node lib/forwardaction/index.js",
     "example:recipe": "node lib/recipe/listAllRecipes.js",
     "clean": "rm -rf ./dist && mkdir -p ./dist",
