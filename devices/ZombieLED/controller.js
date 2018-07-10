@@ -5,7 +5,8 @@ const BluePromise = require('bluebird');
 const debug = require('debug')('neeo:zombie');
 
 var PythonShell = require('python-shell');
-var pyshell = new PythonShell('../rpi_ws281x/python/examples/zombie_alert_RGBC.py');
+var LED_RGBC = new PythonShell('../rpi_ws281x/python/examples/zombie_alert_RGBC.py');
+var LED_modes = new PythonShell('../rpi_ws281x/python/examples/zombie_alert_modes.py');
 
 var sliderValueR = 0;
 var sliderValueG = 0;
@@ -17,27 +18,27 @@ var sliderValueBr = 0;
  */
 
 
-//var pyshell = new PythonShell('test.py');
+//var LED_RGBC = new PythonShell('test.py');
 
 // sends a message to the Python script via stdin
 function updateStripe(){
   console.log("Call updateStripe");
-  //pyshell.send('10 20 30 40');
-  pyshell.send(`${sliderValueR} ${sliderValueG} ${sliderValueB} ${sliderValueBr}`);
+  //LED_RGBC.send('10 20 30 40');
+  LED_RGBC.send(`${sliderValueR} ${sliderValueG} ${sliderValueB} ${sliderValueBr}`);
   console.log(`Sent: ${sliderValueR} ${sliderValueG} ${sliderValueB} ${sliderValueBr}`);
   console.log("Call updateStripe End");
 }
 
 
-pyshell.on('message', function (message) {
+LED_RGBC.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
-  console.log("PyShell: "+ message);
+  console.log("LED_RGBC: "+ message);
 });
 
 // end the input stream and allow the process to exit
 
 function endPython(){
-  pyshell.end(function (err,code,signal) {
+  LED_RGBC.end(function (err,code,signal) {
     if (err) throw err;
     console.log('The exit code was: ' + code);
     console.log('The exit signal was: ' + signal);
@@ -56,34 +57,41 @@ module.exports.onButtonPressed = function onButtonPressed(name, deviceId) {
                           sliderValueG = 0;
                           sliderValueB = 0;
                           sliderValueBr = 255;
+                          updateStripe();
                           break;
     case "FUNCTION GREEN":sliderValueR = 0;
                           sliderValueG = 255;
                           sliderValueB = 0;
                           sliderValueBr = 255;
+                          updateStripe();
                           break;
     case "FUNCTION BLUE":  sliderValueR = 0;
                           sliderValueG = 0;
                           sliderValueB = 255;
                           sliderValueBr = 255;
+                          updateStripe();
                           break;
     case "FUNCTION YELLOW":  sliderValueR = 255;
                           sliderValueG = 255;
                           sliderValueB = 0;
                           sliderValueBr = 255;
+                          updateStripe();
                           break;
     case "POWER OFF":     sliderValueR = 0;
                           sliderValueG = 0;
                           sliderValueB = 0;
                           sliderValueBr = 0;
+                          updateStripe();
                           break;
     case "POWER ON":      sliderValueR = 255;
                           sliderValueG = 255;
                           sliderValueB = 255;
                           sliderValueBr = 255;
+                          updateStripe();
                           break;
+    case "rainbow":       LED_modes.send("2");   
   }
-  updateStripe();
+  
 
 };
 
