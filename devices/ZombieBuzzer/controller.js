@@ -17,7 +17,7 @@ const COMPLEX_DEVICE_UPDATE_ENTRY = 'unique-device-id-001';
 
 let textlabelValue = 'initial value';
 let sliderValue = 0;
-let switchValue = true;
+let switchValue = false;
 let sendComponentUpdate;
 let counter=0;
 
@@ -78,13 +78,15 @@ pushButton.watch(function (err, value) { //Watch for hardware interrupts on push
    .catch((error) => {
      debug('failed to send text notification', error.message);
    });
+	console.log('Buzzer Interrupt');
 });
 
 /**
  * Send random updates to the NEEO Brain. This is just for illustration purpose,
  * idealy those events would be sent of a device
- */
-/*setInterval(() => {
+*/
+/*
+setInterval(() => {
   //debug('Interval');
 
   if (!sendComponentUpdate) {
@@ -107,9 +109,8 @@ pushButton.watch(function (err, value) { //Watch for hardware interrupts on push
      debug('failed to send text notification', error.message);
    });
 
-}, UPDATE_FREQUENCY_MS);*/
-
-
+}, UPDATE_FREQUENCY_MS);
+*/
 function unexportOnClose() { //function to run when exiting program
   //LED.writeSync(0); // Turn LED off
   //LED.unexport(); // Unexport LED GPIO to free resources
