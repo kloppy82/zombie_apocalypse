@@ -6,12 +6,12 @@ const debug = require('debug')('neeo:zombie');
 
 var PythonShell = require('python-shell');
 var LED_RGBC = new PythonShell('../rpi_ws281x/python/examples/zombie_alert_RGBC.py');
-var LED_modes = new PythonShell('../rpi_ws281x/python/examples/zombie_alert_modes.py');
 
 var sliderValueR = 0;
 var sliderValueG = 0;
 var sliderValueB = 0;
 var sliderValueBr = 0;
+var mode = 0;
 /*
  * Device Controller
  * Events on that device from the Brain will be forwarded here for handling.
@@ -29,6 +29,13 @@ function updateStripe(){
   console.log("Call updateStripe End");
 }
 
+function updateMode(){
+  console.log("Call updateStripe");
+  //LED_RGBC.send('10 20 30 40');
+  LED_RGBC.send(`${mode}`);
+  console.log(`Sent: ${sliderValueR} ${sliderValueG} ${sliderValueB} ${sliderValueBr}`);
+  console.log("Call updateStripe End");
+}
 
 LED_RGBC.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
@@ -89,7 +96,8 @@ module.exports.onButtonPressed = function onButtonPressed(name, deviceId) {
                           sliderValueBr = 255;
                           updateStripe();
                           break;
-    case "rainbow":       LED_modes.send("2");   
+    case "rainbow":       mode = 2; 
+						  updateMode();
   }
   
 
