@@ -34,7 +34,7 @@
     "sinon": "^4.4.2"
   },
   "neeoSdkOptions": {
-    "serverName": "myServer",
+    "serverName": "ZombieServer",
     "serverPort": 6336,
     "brainHost": "192.168.1.141",
     "brainPort": ""

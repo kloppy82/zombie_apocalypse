@@ -96,8 +96,8 @@ module.exports.onButtonPressed = function onButtonPressed(name, deviceId) {
                           sliderValueBr = 255;
                           updateStripe();
                           break;
-    case "rainbow":       mode = 2; 
-						  updateMode();
+    case "rainbow":       //mode = 2; 
+						  //updateMode();
   }
   
 
